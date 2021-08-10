@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.view.fragments.DetailPokemonFragment">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimerFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_duration="1000"
+        >
+        <include layout="@layout/placeholder"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <LinearLayout
+
+        android:id="@+id/superContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#D9000000"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardviewPokemon"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_marginTop="-20dp"
+            app:cardCornerRadius="30dp"
+
+
+            >
+            <LinearLayout
+                android:id="@+id/cardviewContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:background="@color/fire"
+                android:orientation="vertical">
+                <LinearLayout
+
+                    android:id="@+id/toplinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:padding="5dp"
+
+
+                    android:orientation="horizontal"
+
+                    >
+
+                    <ImageButton
+                        android:id="@+id/btnBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="9dp"
+                        android:background="@android:color/transparent"
+                        android:contextClickable="true"
+                        android:src="@drawable/ic_round_arrow_back_ios_24"
+                        app:tint="@color/white" />
+
+
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imvfoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+
+
+                    android:adjustViewBounds="true"
+
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pokemon"
+                    />
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:fontFamily="@font/alegreya_sans_sc_italic"
+                android:text="Charmander" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp">
+                    <TextView
+                        android:id="@+id/tvType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="poder"
+                        android:background="#34495E"
+                        android:textColor="@color/white"
+                        android:paddingRight="34dp"
+                        android:paddingLeft="34dp"
+                        />
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    app:cardCornerRadius="20dp">
+                    <TextView
+                        android:id="@+id/tvType2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:background="#34495E"
+                        android:textColor="@color/white"
+                        android:paddingRight="34dp"
+                        android:paddingLeft="34dp"
+                        />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="100dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:text="98.5 KG" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Weight"
+                        android:textColor="#ABB2B9"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvHeight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:text="1.7 M"  />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:text="Height"
+                        android:textColor="#ABB2B9"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="30dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Base Stats"
+                    android:textColor="#ABB2B9"
+                    android:textSize="22sp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="HP"
+                        android:textColor="#ABB2B9"
+                        />
+
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:id="@+id/progress_hp"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            app:indicatorColor="#ff6961"
+                            android:layout_weight="7"
+                            app:trackCornerRadius="20dp"
+                            android:progress="60"
+                            app:trackThickness="10dp"
+                            />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="ATK"
+                        android:textColor="#ABB2B9"
+                        />
+
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progress_atk"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:indicatorColor="#fdfd96"
+                        android:layout_weight="7"
+                        app:trackCornerRadius="20dp"
+                        android:progress="60"
+                        app:trackThickness="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="DEF"
+                        android:textColor="#ABB2B9"
+                        />
+
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progress_def"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:indicatorColor="#5086c1"
+                        android:layout_weight="7"
+                        app:trackCornerRadius="20dp"
+                        android:progress="60"
+                        app:trackThickness="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="SPD"
+                        android:textColor="#ABB2B9"
+                        />
+
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progress_spd"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:indicatorColor="#bdbfbf"
+                        android:layout_weight="7"
+                        app:trackCornerRadius="20dp"
+                        android:progress="60"
+                        app:trackThickness="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="EXP"
+                        android:textColor="#ABB2B9"
+                        />
+
+
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/progress_exp"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        app:indicatorColor="#5dc460"
+                        android:layout_weight="7"
+                        app:trackCornerRadius="20dp"
+                        android:progress="60"
+                        app:trackThickness="10dp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
