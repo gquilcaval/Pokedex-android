@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practice_tablet_movil.databinding.ActivityMainBinding
 import com.example.practice_tablet_movil.ui.view.adapter.PokemonAdapter
 import com.example.practice_tablet_movil.ui.view.viewmodel.PokemonViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
 

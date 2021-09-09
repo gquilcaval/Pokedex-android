@@ -14,8 +14,9 @@ import com.example.practice_tablet_movil.databinding.FragmentDetailPokemonBindin
 import com.example.practice_tablet_movil.databinding.FragmentPokemonsBinding
 import com.example.practice_tablet_movil.ui.view.adapter.PokemonAdapter
 import com.example.practice_tablet_movil.ui.view.viewmodel.PokemonViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PokemonsFragment : Fragment() {
 
     private val pokemonViewModel: PokemonViewModel by viewModels()
@@ -38,6 +39,16 @@ class PokemonsFragment : Fragment() {
         binding.recyclerViewPokemon?.layoutManager = gridLayoutManager
 
 
+
+        pokemonViewModel.isLoading.observe(viewLifecycleOwner, Observer{
+
+            if (it == false){
+                binding.shimerFrameLayoutList.stopShimmer()
+                binding.shimerFrameLayoutList.visibility = View.GONE
+                binding.recyclerViewPokemon.visibility = View.VISIBLE
+            }
+
+        })
 
         pokemonViewModel.listaPokemon.observe(viewLifecycleOwner, Observer {
 

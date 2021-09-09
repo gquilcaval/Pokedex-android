@@ -7,9 +7,18 @@
     tools:context=".ui.view.fragments.PokemonsFragment"
     android:background="#D9000000">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimerFrameLayout_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_duration="3000"
+        >
+        <include layout="@layout/placeholder_pokemon_list"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPokemon"
-
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

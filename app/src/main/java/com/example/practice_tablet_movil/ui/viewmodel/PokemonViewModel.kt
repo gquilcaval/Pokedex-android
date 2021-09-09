@@ -8,12 +8,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.practice_tablet_movil.data.network.model.PokeResult
 import com.example.practice_tablet_movil.data.network.model.Pokemon
 import com.example.practice_tablet_movil.domain.GetPokemonUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PokemonViewModel : ViewModel() {
+@HiltViewModel
+class PokemonViewModel @Inject constructor(
+    private val getPokemonUseCase: GetPokemonUseCase
 
+) : ViewModel() {
 
-    var getPokemonUseCase = GetPokemonUseCase()
+    val isLoading = MutableLiveData<Boolean>()
+
     private val _ListaPokemon = MutableLiveData<List<PokeResult>>()
     val listaPokemon: LiveData<List<PokeResult>>
         get() = _ListaPokemon
@@ -23,14 +29,17 @@ class PokemonViewModel : ViewModel() {
     }
 
     fun onCreate() {
-
+        isLoading.postValue(true)
         viewModelScope.launch {
 
 
             val result = getPokemonUseCase()
 
+            if (result != null){
+                _ListaPokemon.postValue(result)
+                isLoading.postValue(false)
+            }
 
-            _ListaPokemon.postValue(result)
 
         }
     }

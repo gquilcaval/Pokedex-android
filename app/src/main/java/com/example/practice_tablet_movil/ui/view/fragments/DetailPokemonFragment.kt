@@ -1,23 +1,23 @@
 package com.example.practice_tablet_movil.ui.view.fragments
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.practice_tablet_movil.R
 import com.example.practice_tablet_movil.databinding.FragmentDetailPokemonBinding
 import com.example.practice_tablet_movil.ui.view.viewmodel.PokemonDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-
+@AndroidEntryPoint
 class DetailPokemonFragment : Fragment() {
 
     private val pokemonDetailViewModel: PokemonDetailViewModel by viewModels()
@@ -75,8 +75,9 @@ class DetailPokemonFragment : Fragment() {
 
 
         })
-        binding.btnBack.setOnClickListener {
 
+        binding.btnBack.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
         }
     }
 }

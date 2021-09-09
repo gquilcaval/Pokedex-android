@@ -25,7 +25,7 @@ class PokemonAdapter(private val pokemons: List<PokeResult>) : RecyclerView.Adap
 
         holder.nombre.text = pokemons[position].name
         Glide.with(holder.itemView).load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+(position+1)+".png")
-           .diskCacheStrategy(DiskCacheStrategy.ALL)
+           .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
            .into(holder.image)
 
         holder.cardview.setOnClickListener {

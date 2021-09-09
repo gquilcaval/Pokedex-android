@@ -10,7 +10,7 @@
         android:id="@+id/shimerFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:shimmer_duration="1000"
+        app:shimmer_duration="500"
         >
         <include layout="@layout/placeholder"/>
 

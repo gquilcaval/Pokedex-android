@@ -10,12 +10,17 @@ import com.example.practice_tablet_movil.data.network.model.PokeResult
 import com.example.practice_tablet_movil.data.network.model.Pokemon
 import com.example.practice_tablet_movil.domain.GetDetailPokemonUseCase
 import com.example.practice_tablet_movil.domain.GetPokemonUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PokemonDetailViewModel : ViewModel() {
+@HiltViewModel
+class PokemonDetailViewModel @Inject constructor(
+    private val getDetailPokemonUseCase: GetDetailPokemonUseCase
+) : ViewModel() {
 
     val isLoading = MutableLiveData<Boolean>()
-    var getDetailPokemonUseCase = GetDetailPokemonUseCase()
+
     private val _pokemon = MutableLiveData<Pokemon>()
     val pokemon: LiveData<Pokemon>
         get() = _pokemon
