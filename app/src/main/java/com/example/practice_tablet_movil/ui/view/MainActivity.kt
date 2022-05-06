@@ -1,39 +1,22 @@
 package com.example.practice_tablet_movil.ui.view
 
 import android.os.Bundle
-import androidx.activity.viewModels
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
+import com.example.practice_tablet_movil.R
+import com.example.practice_tablet_movil.di.ServiceLocator
 
-import androidx.recyclerview.widget.RecyclerView
-import com.example.practice_tablet_movil.databinding.ActivityMainBinding
-import com.example.practice_tablet_movil.ui.view.adapter.PokemonAdapter
-import com.example.practice_tablet_movil.ui.view.viewmodel.PokemonViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-
-
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-
-
-
-
-
-
-
+        setContentView(R.layout.activity_main)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        ServiceLocator.destroy()
+    }
 
 }

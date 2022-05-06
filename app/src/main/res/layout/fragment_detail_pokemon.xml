@@ -6,22 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.view.fragments.DetailPokemonFragment">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimerFrameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:shimmer_duration="500"
-        >
-        <include layout="@layout/placeholder"/>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <LinearLayout
 
-        android:id="@+id/superContainer"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+
         android:background="#D9000000"
         android:orientation="vertical">
 
@@ -40,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="20dp"
-                android:background="@color/fire"
+                tools:background="@color/fire"
                 android:orientation="vertical">
                 <LinearLayout
 
@@ -68,18 +59,17 @@
 
 
                 </LinearLayout>
+
                 <ImageView
                     android:id="@+id/imvfoto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
 
-
                     android:adjustViewBounds="true"
 
                     android:scaleType="fitCenter"
-                    android:src="@drawable/pokemon"
-                    />
+                    tools:src="@drawable/pokemon" />
 
             </LinearLayout>
 
@@ -87,18 +77,27 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-
-
-
-
-
-
+        <LinearLayout
+            android:id="@+id/containerProgressbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/superContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
+            android:visibility="gone"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
@@ -106,7 +105,7 @@
                 android:textColor="@color/white"
                 android:textSize="35sp"
                 android:fontFamily="@font/alegreya_sans_sc_italic"
-                android:text="Charmander" />
+                tools:text="Charmander" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,7 +120,7 @@
                         android:id="@+id/tvType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="poder"
+                        tools:text="poder"
                         android:background="#34495E"
                         android:textColor="@color/white"
                         android:paddingRight="34dp"
@@ -163,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:text="98.5 KG" />
+                        tools:text="98.5 KG" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -183,7 +182,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="18sp"
-                        android:text="1.7 M"  />
+                        tools:text="1.7 M"  />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -347,6 +346,8 @@
 
 
         </LinearLayout>
+
+
 
 
     </LinearLayout>

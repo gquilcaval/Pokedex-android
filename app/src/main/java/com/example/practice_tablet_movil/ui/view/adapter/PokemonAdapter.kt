@@ -1,58 +1,66 @@
 package com.example.practice_tablet_movil.ui.view.adapter
 
-import android.graphics.Color
-import android.os.Bundle
+import android.annotation.SuppressLint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import android.widget.ImageView
+import android.widget.RelativeLayout
+import android.widget.TextView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.practice_tablet_movil.R
-import com.example.practice_tablet_movil.data.network.model.PokeResult
-import com.example.practice_tablet_movil.data.network.model.Pokemon
-import com.example.practice_tablet_movil.databinding.CardviewPokemonBinding
+import com.example.practice_tablet_movil.domain.model.Pokemon
+import com.example.practice_tablet_movil.extensions.getImagePath
+import com.example.practice_tablet_movil.media.WrapperImage
+import com.example.practice_tablet_movil.utils.PokemonColorUtil
 
-class PokemonAdapter(private val pokemons: List<PokeResult>) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        return ViewHolder(layoutInflater.inflate(R.layout.cardview_pokemon, parent, false))
-    }
+class PokemonAdapter(private var listPokemons: List<Pokemon>, private val selectItem: (id: Int, image: ImageView, idImage: String) -> Unit) : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    inner class PokemonViewHolder(view: View): RecyclerView.ViewHolder(view){
+        val image = view.findViewById<ImageView>(R.id.imagePokemon)
+        val id = view.findViewById<TextView>(R.id.tvId)
+        val nombre = view.findViewById<TextView>(R.id.tvNombre)
+        val type = view.findViewById<TextView>(R.id.tvType3)
+        val container = view.findViewById<RelativeLayout>(R.id.relativeLayoutBackground)
 
-        holder.nombre.text = pokemons[position].name
-        Glide.with(holder.itemView).load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+(position+1)+".png")
-           .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-           .into(holder.image)
+        @SuppressLint("ResourceAsColor")
+        fun bind(pokemon: Pokemon) {
+            ViewCompat.setTransitionName(image, "img$adapterPosition")
+            id.text = pokemon.id
+            nombre.text = pokemon.name
+            type.text = pokemon.typeOptional[0]
+            WrapperImage.picasso.load(getImagePath(adapterPosition+1, 3), image)
 
-        holder.cardview.setOnClickListener {
-            val bundle = Bundle()
-
-            bundle.putInt("id", (position+1))
-
-            Navigation.findNavController(it).navigate(R.id.action_pokemonsFragment_to_detailPokemonFragment,bundle)
+            /*container.setCardBackgroundColor(ColorStateList.valueOf(ContextCompat.getColor(itemView.context, itemView.resources.getIdentifier("${pokemon.typeOptional[0].substring(0,1).lowercase()}${pokemon.typeOptional[0].substring(1,pokemon.typeOptional[0].length)}",
+                "color", itemView.context.packageName))))*/
+            val color = PokemonColorUtil(itemView.context).getPokemonColor(pokemon.typeOptional)
+            container.background.colorFilter =
+                PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP)
+            itemView.setOnClickListener {
+                selectItem(position, image, "img$adapterPosition")
+            }
         }
-
-
-
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context).inflate(R.layout.cardview_pokemon, parent, false)
+        return PokemonViewHolder(layoutInflater)
     }
 
     override fun getItemCount(): Int {
-        return pokemons.size
+        return listPokemons.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var binding = CardviewPokemonBinding.bind(itemView)
-
-        val image = binding.imagePokemon
-        val nombre = binding.tvNombre
-        val cardview = binding.cardviewPokemon
-
-
+    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
+        holder.bind(listPokemons[position])
     }
 
+    fun update(list: List<Pokemon>) {
+        listPokemons = list
+        notifyDataSetChanged()
+    }
 
 }

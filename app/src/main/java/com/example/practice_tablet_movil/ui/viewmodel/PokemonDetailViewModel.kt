@@ -1,51 +1,49 @@
-package com.example.practice_tablet_movil.ui.view.viewmodel
+package com.example.practice_tablet_movil.ui.viewmodel
 
-import android.app.UiModeManager
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.practice_tablet_movil.data.network.model.PokeResult
-import com.example.practice_tablet_movil.data.network.model.Pokemon
-import com.example.practice_tablet_movil.domain.GetDetailPokemonUseCase
-import com.example.practice_tablet_movil.domain.GetPokemonUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.practice_tablet_movil.data.OperationResult
+import com.example.practice_tablet_movil.data.PokemonRepository
+import com.example.practice_tablet_movil.domain.model.Pokemon
+import com.example.practice_tablet_movil.domain.usecases.FetchAllPokemonUseCase
+import com.example.practice_tablet_movil.domain.usecases.FetchPokemonUseCase
+
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class PokemonDetailViewModel @Inject constructor(
-    private val getDetailPokemonUseCase: GetDetailPokemonUseCase
-) : ViewModel() {
+class PokemonDetailViewModel(private val fetchPokemonUseCase: FetchPokemonUseCase) : ViewModel() {
 
-    val isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _pokemon = MutableLiveData<Pokemon>()
-    val pokemon: LiveData<Pokemon>
-        get() = _pokemon
+    val pokemon: LiveData<Pokemon> = _pokemon
 
-    init {
-        pokemon.value?.let { onCreate(it.id) }
-    }
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
-    fun onCreate(id:Int) {
-
-        isLoading.postValue(true)
+    fun getData(id: Int){
         viewModelScope.launch {
-
-
-
-            val result = getDetailPokemonUseCase(id)
-
-            if (result != null){
-                _pokemon.postValue(result)
-                isLoading.postValue(false)
+            if (_isLoading.value == null){
+                _isLoading.value = true
+                when(val data = fetchPokemonUseCase(id)){
+                    is OperationResult.Success -> success(data.data)
+                    is OperationResult.Failure -> failure(data.exception.toString())
+                }
             }
-
-
-
         }
     }
+
+    private fun success(entity: Pokemon) {
+        _pokemon.value = entity
+        _isLoading.value = false
+    }
+
+    private fun failure(exception: String) {
+        _error.value = exception
+        _isLoading.value = false
+    }
+
 
 }

@@ -6,22 +6,17 @@
     app:startDestination="@id/pokemonsFragment">
     <fragment
         android:id="@+id/pokemonsFragment"
-        android:name="com.example.practice_tablet_movil.ui.view.fragments.PokemonsFragment"
+        android:name="com.example.practice_tablet_movil.ui.view.fragments.PokemonFragment"
         android:label="fragment_pokemons"
         tools:layout="@layout/fragment_pokemons" >
         <action
             android:id="@+id/action_pokemonsFragment_to_detailPokemonFragment"
-            app:destination="@id/detailPokemonFragment" />
+            app:destination="@id/detailPokemonFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/detailPokemonFragment"
         android:name="com.example.practice_tablet_movil.ui.view.fragments.DetailPokemonFragment"
         android:label="fragment_detail_pokemon"
-        tools:layout="@layout/fragment_detail_pokemon" >
-        <action
-            android:id="@+id/action_detailPokemonFragment_to_pokemonsFragment"
-            app:destination="@id/pokemonsFragment"
-            app:popUpTo="@+id/main_nav_graph"
-            app:popUpToInclusive="true"/>
-    </fragment>
+        tools:layout="@layout/fragment_detail_pokemon" />
 </navigation>

@@ -1,48 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cardviewPokemon"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayoutBackground"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/background_item_pokemon"
     android:clickable="true"
+    android:clipToPadding="false"
+    android:focusable="true"
+    android:padding="8dp"
+    tools:backgroundTint="@color/grass"
 
-    app:cardCornerRadius="15dp">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#B3000000"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imagePokemon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+>
 
 
-            android:src="@mipmap/ic_launcher"
-            android:scaleType="fitCenter"/>
+    <TextView
+    android:id="@+id/tvNombre"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:textColor="@color/white"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    tools:text="Titulo" />
 
-        <TextView
-            android:id="@+id/tvNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/alegreya_sans_sc_italic"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="Pikachu"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:alpha="0.25"
+        android:gravity="top"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="#001" />
 
 
+    <TextView
+        android:id="@+id/textViewType1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewType2"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/background_item_pokemon_span"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="Grass"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/textViewType2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvType3"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/background_item_pokemon_span"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="Grass"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 
-        </LinearLayout>
+    <TextView
+        android:id="@+id/tvType3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_item_pokemon_span"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:text="Grass" />
 
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-16dp"
+        android:layout_marginBottom="-24dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.25"
+        android:src="@drawable/pokeball"
+        app:tint="@color/white" />
 
+<ImageView
+    android:id="@+id/imagePokemon"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentBottom="true"
+    android:adjustViewBounds="true"
+    tools:src="@mipmap/ic_launcher" />
 
-
-</com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

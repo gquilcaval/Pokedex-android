@@ -1,47 +1,48 @@
-package com.example.practice_tablet_movil.ui.view.viewmodel
+package com.example.practice_tablet_movil.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.practice_tablet_movil.data.network.model.PokeResult
-import com.example.practice_tablet_movil.data.network.model.Pokemon
-import com.example.practice_tablet_movil.domain.GetPokemonUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.practice_tablet_movil.data.OperationResult
+import com.example.practice_tablet_movil.data.PokemonRepository
+
+import com.example.practice_tablet_movil.domain.model.Pokemon
+import com.example.practice_tablet_movil.domain.usecases.FetchAllPokemonUseCase
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class PokemonViewModel @Inject constructor(
-    private val getPokemonUseCase: GetPokemonUseCase
 
-) : ViewModel() {
+class PokemonViewModel(private val fetchAllPokemonUseCase: FetchAllPokemonUseCase) : ViewModel() {
 
-    val isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _ListaPokemon = MutableLiveData<List<PokeResult>>()
-    val listaPokemon: LiveData<List<PokeResult>>
-        get() = _ListaPokemon
+    private val _listaPokemon = MutableLiveData<List<Pokemon>>()
+    val listaPokemon: LiveData<List<Pokemon>> = _listaPokemon
 
-    init {
-        onCreate()
-    }
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
-    fun onCreate() {
-        isLoading.postValue(true)
+    fun getData(){
         viewModelScope.launch {
-
-
-            val result = getPokemonUseCase()
-
-            if (result != null){
-                _ListaPokemon.postValue(result)
-                isLoading.postValue(false)
+            if (_isLoading.value == null) {
+                _isLoading.value = true
+                when(val data = fetchAllPokemonUseCase()){
+                    is OperationResult.Success -> success(data.data)
+                    is OperationResult.Failure -> failure(data.exception.toString())
+                }
             }
-
 
         }
     }
 
+    fun success(list: List<Pokemon>) {
+        _listaPokemon.value = list.toList()
+        _isLoading.value = false
+    }
+
+    fun failure(exception: String) {
+        _error.value = exception
+        _isLoading.value = false
+    }
 }
